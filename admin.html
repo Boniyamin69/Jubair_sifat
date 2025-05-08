@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jubair Sifat - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Amiri', serif;
+        }
+
+        body {
+            background: #333940; /* Charcoal gray */
+            color: #f5f4e9; /* Ivory */
+            overflow-x: hidden;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .admin-panel {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(51, 57, 64, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            border: 1px solid #00c4b4; /* Bright teal */
+            text-align: center;
+        }
+
+        .admin-panel h2 {
+            color: #00c4b4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .admin-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(74, 79, 86, 0.9); /* Lighter dark gray */
+            border-radius: 10px;
+        }
+
+        .admin-section h3 {
+            color: #2a4d9b; /* Rich sapphire blue */
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .admin-section input, .admin-section textarea, .admin-section select {
+            padding: 0.8rem;
+            background: rgba(74, 79, 86, 0.9);
+            border: 1px solid #00c4b4;
+            border-radius: 10px;
+            color: #f5f4e9;
+            width: 100%;
+            margin-bottom: 0.8rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .admin-section button {
+            padding: 0.8rem 1.5rem;
+            background: #2a4d9b;
+            border: none;
+            border-radius: 10px;
+            color: #f5f4e9;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .admin-section button:hover {
+            background: #3b6ed9;
+        }
+
+        #skills-list, #projects-list, #works-list, #contacts-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            justify-content: center;
+        }
+
+        .skill-item, .project-item, .work-item, .contact-item {
+            background: rgba(42, 77, 155, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            color: #00c4b4;
+        }
+
+        .save-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            padding: 1rem;
+            background: #2a4d9b;
+            border: none;
+            border-radius: 10px;
+            color: #f5f4e9;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            margin: 0 auto;
+        }
+
+        .save-btn:hover {
+            background: #3b6ed9;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .admin-panel { padding: 1.5rem; }
+            .admin-section input, .admin-section textarea { padding: 0.6rem; }
+            .admin-section button { padding: 0.6rem 1rem; }
+            .save-btn { max-width: 250px; }
+        }
+
+        @media (max-width: 480px) {
+            .admin-panel { padding: 1rem; }
+            .admin-section h3 { font-size: 1.2rem; }
+            .admin-section input, .admin-section textarea { padding: 0.5rem; }
+            .admin-section button { padding: 0.5rem 0.8rem; }
+            .save-btn { max-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-panel">
+        <h2>Admin Panel</h2>
+
+        <div class="admin-section">
+            <h3>Hero Section</h3>
+            <input type="text" id="admin-hero-name" placeholder="Hero Name">
+            <textarea id="admin-hero-bio" placeholder="Hero Bio"></textarea>
+            <input type="text" id="admin-hero-img" placeholder="Hero Image URL">
+            <input type="text" id="admin-hero-audio" placeholder="Hero Audio URL">
+        </div>
+
+        <div class="admin-section">
+            <h3>About Section</h3>
+            <textarea id="admin-about-bio" placeholder="About Bio"></textarea>
+            <input type="text" id="admin-about-img" placeholder="About Image URL">
+            <input type="text" id="admin-skill" placeholder="Add Skill" onkeypress="if(event.key === 'Enter') addSkill()">
+            <div id="skills-list"></div>
+        </div>
+
+        <div class="admin-section">
+            <h3>Projects (Nasheeds)</h3>
+            <input type="text" id="admin-project-title" placeholder="Project Title">
+            <textarea id="admin-project-desc" placeholder="Project Description"></textarea>
+            <input type="text" id="admin-project-audio" placeholder="Project Audio URL">
+            <button onclick="addProject()">Add Project</button>
+            <div id="projects-list"></div>
+        </div>
+
+        <div class="admin-section">
+            <h3>Writings</h3>
+            <input type="text" id="admin-work-title" placeholder="Work Title">
+            <textarea id="admin-work-desc" placeholder="Work Description"></textarea>
+            <input type="text" id="admin-work-link" placeholder="Work Link">
+            <button onclick="addWork()">Add Work</button>
+            <div id="works-list"></div>
+        </div>
+
+        <div class="admin-section">
+            <h3>Contact Section</h3>
+            <input type="text" id="admin-contact-icon" placeholder="Icon Class (e.g., fab fa-facebook)">
+            <input type="text" id="admin-contact-link" placeholder="Link or Contact (e.g., URL, phone, email)">
+            <select id="admin-contact-type">
+                <option value="link">Link</option>
+                <option value="phone">Phone</option>
+                <option value="email">Email</option>
+            </select>
+            <button onclick="addContact()">Add Contact</button>
+            <div id="contacts-list"></div>
+        </div>
+
+        <button class="save-btn" onclick="saveChanges()">Save to Portfolio</button>
+    </div>
+
+    <script>
+        let portfolioData = {};
+
+        // Load data from the server on page load
+        fetch('load_data.php')
+            .then(response => response.json())
+            .then(data => {
+                portfolioData = data;
+
+                // Populate fields with existing data
+                document.getElementById('admin-hero-name').value = portfolioData.hero.name;
+                document.getElementById('admin-hero-bio').value = portfolioData.hero.bio;
+                document.getElementById('admin-hero-img').value = portfolioData.hero.img;
+                document.getElementById('admin-hero-audio').value = portfolioData.hero.audio;
+                document.getElementById('admin-about-bio').value = portfolioData.about.bio;
+                document.getElementById('admin-about-img').value = portfolioData.about.img;
+
+                portfolioData.about.skills.forEach(skill => {
+                    const skillItem = document.createElement('div');
+                    skillItem.className = 'skill-item';
+                    skillItem.textContent = skill;
+                    document.getElementById('skills-list').appendChild(skillItem);
+                });
+
+                portfolioData.projects.forEach(project => {
+                    const projectItem = document.createElement('div');
+                    projectItem.className = 'project-item';
+                    projectItem.textContent = `${project.title}: ${project.desc} ${project.audio ? `(Audio: ${project.audio})` : ''}`;
+                    document.getElementById('projects-list').appendChild(projectItem);
+                });
+
+                portfolioData.works.forEach(work => {
+                    const workItem = document.createElement('div');
+                    workItem.className = 'work-item';
+                    workItem.textContent = `${work.title}: ${work.desc} (Link: ${work.link})`;
+                    document.getElementById('works-list').appendChild(workItem);
+                });
+
+                portfolioData.contacts.forEach(contact => {
+                    const contactItem = document.createElement('div');
+                    contactItem.className = 'contact-item';
+                    contactItem.textContent = `${contact.icon}: ${contact.link} (${contact.type})`;
+                    document.getElementById('contacts-list').appendChild(contactItem);
+                });
+            })
+            .catch(error => console.error('Error loading data:', error));
+
+        function addSkill() {
+            const skillInput = document.getElementById('admin-skill').value;
+            if (skillInput) {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.textContent = skillInput;
+                document.getElementById('skills-list').appendChild(skillItem);
+                document.getElementById('admin-skill').value = '';
+                portfolioData.about.skills.push(skillInput);
+            }
+        }
+
+        function addProject() {
+            const title = document.getElementById('admin-project-title').value;
+            const desc = document.getElementById('admin-project-desc').value;
+            const audio = document.getElementById('admin-project-audio').value;
+            if (title && desc) {
+                const projectItem = document.createElement('div');
+                projectItem.className = 'project-item';
+                projectItem.textContent = `${title}: ${desc} ${audio ? `(Audio: ${audio})` : ''}`;
+                document.getElementById('projects-list').appendChild(projectItem);
+                portfolioData.projects.push({ title, desc, audio: audio || '' });
+                document.getElementById('admin-project-title').value = '';
+                document.getElementById('admin-project-desc').value = '';
+                document.getElementById('admin-project-audio').value = '';
+            }
+        }
+
+        function addWork() {
+            const title = document.getElementById('admin-work-title').value;
+            const desc = document.getElementById('admin-work-desc').value;
+            const link = document.getElementById('admin-work-link').value;
+            if (title && desc) {
+                const workItem = document.createElement('div');
+                workItem.className = 'work-item';
+                workItem.textContent = `${title}: ${desc} (Link: ${link || '#'})`;
+                document.getElementById('works-list').appendChild(workItem);
+                portfolioData.works.push({ title, desc, link: link || '#' });
+                document.getElementById('admin-work-title').value = '';
+                document.getElementById('admin-work-desc').value = '';
+                document.getElementById('admin-work-link').value = '';
+            }
+        }
+
+        function addContact() {
+            const icon = document.getElementById('admin-contact-icon').value;
+            const link = document.getElementById('admin-contact-link').value;
+            const type = document.getElementById('admin-contact-type').value;
+            if (icon && link) {
+                const contactItem = document.createElement('div');
+                contactItem.className = 'contact-item';
+                contactItem.textContent = `${icon}: ${link} (${type})`;
+                document.getElementById('contacts-list').appendChild(contactItem);
+                portfolioData.contacts.push({ icon, link, type });
+                document.getElementById('admin-contact-icon').value = '';
+                document.getElementById('admin-contact-link').value = '';
+            }
+        }
+
+        function saveChanges() {
+            portfolioData.hero.name = document.getElementById('admin-hero-name').value || portfolioData.hero.name;
+            portfolioData.hero.bio = document.getElementById('admin-hero-bio').value || portfolioData.hero.bio;
+            portfolioData.hero.img = document.getElementById('admin-hero-img').value || portfolioData.hero.img;
+            portfolioData.hero.audio = document.getElementById('admin-hero-audio').value || portfolioData.hero.audio;
+            portfolioData.about.bio = document.getElementById('admin-about-bio').value || portfolioData.about.bio;
+            portfolioData.about.img = document.getElementById('admin-about-img').value || portfolioData.about.img;
+
+            fetch('save_data.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(portfolioData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+                console.log(JSON.stringify(portfolioData, null, 2));
+            })
+            .catch(error => console.error('Error saving data:', error));
+        }
+    </script>
+</body>
+                                                                   </html>

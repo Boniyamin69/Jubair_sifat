@@ -380,10 +380,10 @@
         <div class="image-container">
             <img id="hero-img" src="jubair-tech.jpg" alt="Jubair Sifat - Singer">
         </div>
-        <h1 id="hero-name"></h1>
-        <p id="hero-bio"></p>
+        <h1 id="hero-name">Jubair Sifat</h1>
+        <p id="hero-bio">Jubair Sifat is a renowned Bangladeshi Islamic singer and writer, known for his soulful nasheeds and heartfelt writings that inspire peace and devotion. His work resonates with audiences seeking spiritual connection through art.</p>
         <a href="#projects" class="btn">Listen to My Nasheeds</a>
-        <iframe id="hero-audio" style="margin-top: 1.5rem; border-radius: 8px;" width="300" height="80" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="hero-audio" style="margin-top: 1.5rem; border-radius: 8px;" width="300" height="80" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=abc123" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <section id="about" class="section">
@@ -393,26 +393,65 @@
                 <img id="about-img" src="jubair-traditional.jpg" alt="Jubair Sifat - Traditional">
             </div>
             <div>
-                <p id="about-bio"></p>
-                <div id="skills-list" class="skills"></div>
+                <p id="about-bio">Hailing from Dhaka, Bangladesh, Jubair Sifat has been enchanting audiences since 2015 with his melodious voice and profound writings. With a background in Islamic studies and literature, he combines his talents to create nasheeds and books that uplift the soul. Jubair has performed at Islamic events across the globe, spreading messages of love and faith.</p>
+                <div id="skills-list" class="skills">
+                    <!-- Skills will be populated dynamically -->
+                </div>
             </div>
         </div>
     </section>
 
     <section id="projects" class="section">
         <h2>My Nasheeds</h2>
-        <div id="projects-list" class="projects"></div>
+        <div id="projects-list" class="projects">
+            <!-- Projects will be populated dynamically -->
+        </div>
     </section>
 
     <section id="works" class="section">
         <h2>My Writings</h2>
-        <div id="works-list" class="works"></div>
+        <div id="works-list" class="works">
+            <!-- Works will be populated dynamically -->
+        </div>
     </section>
 
     <section id="contact" class="section">
         <h2>Contact Me</h2>
         <div class="contact">
-            <div id="contact-links" class="contact-links"></div>
+            <div class="contact-links">
+                <div class="contact-item">
+                    <i class="fab fa-facebook"></i>
+                    <a href="https://facebook.com/jubairsifat" target="_blank">Facebook</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-facebook-messenger"></i>
+                    <a href="https://m.me/jubairsifat" target="_blank">Messenger</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/jubairsifat" target="_blank">Instagram</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-twitter"></i>
+                    <a href="https://twitter.com/jubairsifat" target="_blank">Twitter</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-youtube"></i>
+                    <a href="https://youtube.com/jubairsifat" target="_blank">YouTube</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/jubairsifat" target="_blank">LinkedIn</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+880 123 456 7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:jubairsifat@example.com">jubairsifat@example.com</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -422,66 +461,79 @@
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script>
-        // Load data from the server
-        fetch('load_data.php')
-            .then(response => response.json())
-            .then(portfolioData => {
-                // Populate Hero Section
-                document.getElementById('hero-name').textContent = portfolioData.hero.name;
-                document.getElementById('hero-bio').textContent = portfolioData.hero.bio;
-                document.getElementById('hero-img').src = portfolioData.hero.img;
-                document.getElementById('hero-audio').src = portfolioData.hero.audio;
+        // Default portfolio data
+        let portfolioData = {
+            hero: { 
+                name: 'Jubair Sifat', 
+                bio: 'Jubair Sifat is a renowned Bangladeshi Islamic singer and writer, known for his soulful nasheeds and heartfelt writings that inspire peace and devotion. His work resonates with audiences seeking spiritual connection through art.', 
+                img: 'jubair-tech.jpg', 
+                audio: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=abc123' 
+            },
+            about: { 
+                bio: 'Hailing from Dhaka, Bangladesh, Jubair Sifat has been enchanting audiences since 2015 with his melodious voice and profound writings. With a background in Islamic studies and literature, he combines his talents to create nasheeds and books that uplift the soul. Jubair has performed at Islamic events across the globe, spreading messages of love and faith.', 
+                img: 'jubair-traditional.jpg', 
+                skills: ['Islamic Nasheeds', 'Creative Writing', 'Poetry', 'Public Speaking'] 
+            },
+            projects: [
+                { title: 'Path to Peace', desc: 'A heartfelt nasheed released in 2022, dedicated to the beauty of faith. Available on YouTube and Spotify.', audio: 'https://open.spotify.com/embed/track/xyz789pqr' },
+                { title: 'Light of Salah', desc: 'A 2024 release celebrating the serenity of prayer, performed at the Dhaka Islamic Fest.', audio: 'https://open.spotify.com/embed/track/abc456def' },
+                { title: 'Call to Unity', desc: 'Upcoming nasheed set for release in July 2025, focusing on community and brotherhood.' }
+            ],
+            works: [
+                { title: 'Reflections of Faith', desc: 'A book of poetry published in 2021, exploring themes of spirituality and devotion.', link: '#' },
+                { title: 'Journey Within', desc: 'A 2023 collection of essays on Islamic values and personal growth.', link: '#' },
+                { title: 'Whispers of the Heart', desc: 'Upcoming book set for release in 2026, blending prose and poetry.', link: '#' }
+            ]
+        };
 
-                // Populate About Section
-                document.getElementById('about-bio').textContent = portfolioData.about.bio;
-                document.getElementById('about-img').src = portfolioData.about.img;
-                const skillsList = document.getElementById('skills-list');
-                portfolioData.about.skills.forEach(skill => {
-                    const skillItem = document.createElement('span');
-                    skillItem.className = 'skill';
-                    skillItem.textContent = skill;
-                    skillsList.appendChild(skillItem);
-                });
+        // Load data from localStorage if available
+        const savedData = localStorage.getItem('portfolioData');
+        if (savedData) {
+            portfolioData = JSON.parse(savedData);
+        }
 
-                // Populate Projects Section
-                const projectsList = document.getElementById('projects-list');
-                portfolioData.projects.forEach(project => {
-                    const projectCard = document.createElement('div');
-                    projectCard.className = 'project-card';
-                    projectCard.innerHTML = `
-                        <h3>${project.title}</h3>
-                        <p>${project.desc}</p>
-                        ${project.audio ? `<iframe width="100%" height="100" src="${project.audio}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''}
-                    `;
-                    projectsList.appendChild(projectCard);
-                });
+        // Populate Hero Section
+        document.getElementById('hero-name').textContent = portfolioData.hero.name;
+        document.getElementById('hero-bio').textContent = portfolioData.hero.bio;
+        document.getElementById('hero-img').src = portfolioData.hero.img;
+        document.getElementById('hero-audio').src = portfolioData.hero.audio;
 
-                // Populate Works Section
-                const worksList = document.getElementById('works-list');
-                portfolioData.works.forEach(work => {
-                    const workItem = document.createElement('div');
-                    workItem.className = 'work-item';
-                    workItem.innerHTML = `
-                        <h3>${work.title}</h3>
-                        <p>${work.desc}</p>
-                        <a href="${work.link}" class="btn" style="padding: 0.5rem 1rem; font-size: 1rem;">${work.link === '#' ? 'Learn More' : 'Read More'}</a>
-                    `;
-                    worksList.appendChild(workItem);
-                });
+        // Populate About Section
+        document.getElementById('about-bio').textContent = portfolioData.about.bio;
+        document.getElementById('about-img').src = portfolioData.about.img;
+        const skillsList = document.getElementById('skills-list');
+        portfolioData.about.skills.forEach(skill => {
+            const skillItem = document.createElement('span');
+            skillItem.className = 'skill';
+            skillItem.textContent = skill;
+            skillsList.appendChild(skillItem);
+        });
 
-                // Populate Contact Section
-                const contactLinks = document.getElementById('contact-links');
-                portfolioData.contacts.forEach(contact => {
-                    const contactItem = document.createElement('div');
-                    contactItem.className = 'contact-item';
-                    contactItem.innerHTML = `
-                        <i class="${contact.icon}"></i>
-                        ${contact.type === 'link' ? `<a href="${contact.link}" target="_blank"></a>` : contact.type === 'phone' ? `<span>${contact.link}</span>` : `<a href="mailto:${contact.link}"></a>`}
-                    `;
-                    contactLinks.appendChild(contactItem);
-                });
-            })
-            .catch(error => console.error('Error loading data:', error));
+        // Populate Projects Section
+        const projectsList = document.getElementById('projects-list');
+        portfolioData.projects.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'project-card';
+            projectCard.innerHTML = `
+                <h3>${project.title}</h3>
+                <p>${project.desc}</p>
+                ${project.audio ? `<iframe width="100%" height="100" src="${project.audio}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ''}
+            `;
+            projectsList.appendChild(projectCard);
+        });
+
+        // Populate Works Section
+        const worksList = document.getElementById('works-list');
+        portfolioData.works.forEach(work => {
+            const workItem = document.createElement('div');
+            workItem.className = 'work-item';
+            workItem.innerHTML = `
+                <h3>${work.title}</h3>
+                <p>${work.desc}</p>
+                <a href="${work.link}" class="btn" style="padding: 0.5rem 1rem; font-size: 1rem;">${work.link === '#' ? 'Learn More' : 'Read More'}</a>
+            `;
+            worksList.appendChild(workItem);
+        });
 
         // Canvas animation
         const canvas = document.getElementById('islamic-pattern-canvas');
